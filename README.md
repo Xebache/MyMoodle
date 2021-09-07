@@ -42,6 +42,17 @@
     <tbody>
         <tr>
             <td>Prof 1</td><td>teacher1@mail.eu</td><td>Password1</td>
+            <td>Prof 2</td><td>teacher2@mail.eu</td><td>Password1</td>
+            <td>Prof 3</td><td>teacher3@mail.eu</td><td>Password1</td>
+            <td>Prof 4</td><td>teacher4@mail.eu</td><td>Password1</td>
+            <td>Etudiant 1</td><td>student1@mail.com</td><td>Password1</td>
+            <td>Etudiant 2</td><td>student2@mail.com</td><td>Password1</td>
+            <td>Etudiant 3</td><td>student3@mail.com</td><td>Password1</td>
+            <td>Etudiant 4</td><td>student4@mail.com</td><td>Password1</td>
+            <td>Etudiant 5</td><td>student5@mail.com</td><td>Password1</td>
+            <td>Etudiant 6</td><td>student6@mail.com</td><td>Password1</td>
         </tr>
     </tbody>
  </table>
+
+ A shortcut was added to log in as `Prof 1` or `Etudiant 2`
