@@ -34,7 +34,14 @@
  DB users:
 
  <table>
-    <tr>
-        <td>Prof 1</td><td>teacher1@mail.eu</td><td>Password1</td>
-  </tr>
+    <thead>
+        <tr>
+            <th>Name</th><th>Mail</th><th>Password</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Prof 1</td><td>teacher1@mail.eu</td><td>Password1</td>
+        </tr>
+    </tbody>
  </table>
