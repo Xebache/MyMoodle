@@ -22,18 +22,9 @@
 
 ## Screenshots
 
-<p align="center">
+<div display="flex" flex-direction="row" justify-content="space-around" align-items="center" flex-wrap="wrap">
   <img alt="Screenshot" src="https://github.com/Xebache/MyMoodle/blob/main/docs/screenshots/login.png" width="100" />
-</p>
-
-<p align="center">
   <img alt="Screenshot" src="https://github.com/Xebache/MyMoodle/blob/main/docs/screenshots/student_home.png" width="250" />
-</p>
-
-<p align="center">
   <img alt="Screenshot" src="https://github.com/Xebache/MyMoodle/blob/main/docs/screenshots/teacher_questions.png" width="250" />
-</p>
-
-<p align="center">
   <img alt="Screenshot" src="https://github.com/Xebache/MyMoodle/blob/main/docs/screenshots/teacher_grade.png" width="250" />
-</p>
+</div>
