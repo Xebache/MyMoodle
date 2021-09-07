@@ -33,7 +33,7 @@
 
  DB users:
 
- <table>
+ <table valign="center">
     <thead>
         <tr>
             <th>Name</th><th>Mail</th><th>Password</th>
