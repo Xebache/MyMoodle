@@ -143,46 +143,46 @@ namespace Moodle.Models {
         public void SeedData() {
             Database.BeginTransaction();
 
-            Teacher alain = new("Alain Smets", "brlacroix@epfc.eu", "Password1,");
-            Teacher ben = new("Benoît Penelle", "bepenelle@epfc.eu", "Password1,");
-            Teacher boris = new("Boris Verhaegen", "boverhaegen@epfc.eu", "Password1,");
-            Teacher bruno = new("Bruno Lacroix", "brlacroix@epfc.eu", "Password1,");
-            Teachers.AddRange(new[] { ben, bruno, boris });
+            Teacher teacher1 = new("Prof 1", "teacher1@mail.eu", "Password1,");
+            Teacher teacher2 = new("Prof 2", "teacher2@mail.eu", "Password1,");
+            Teacher teacher3 = new("Prof 3", "teacher3@mail.eu", "Password1,");
+            Teacher teacher4 = new("Prof 4", "teacher4@mail.eu", "Password1,");
+            Teachers.AddRange(new[] { teacher1, teacher2, teacher3, teacher4 });
             SaveChanges();
 
-            Student clement = new("Clément Logelain", "l-clement@mail.com", "Password1,");
-            Student damien = new("Damien Raquet", "damien.raquet@mail.com", "Password1,");
-            Student elise = new("Elise Piron", "Elise.Piron@mail.com", "Password1,");
-            Student remy = new("Remy Leseultre", "leseultre.remy@mail.com", "Password1,");
-            Student stan = new("Stanley Peeters", "sslp235@mail.com", "Password1,");
-            Student guillaume = new("Guillaume Baré", "bare.guillaume@mail.com", "Password1,");
-            Students.AddRange(new[] { clement, damien, elise, remy, stan, guillaume });
+            Student student1 = new("Etudiant 1", "student1@mail.com", "Password1,");
+            Student student2 = new("Etudiant 2", "student2@mail.com", "Password1,");
+            Student student3 = new("Etudiant 3", "student3@mail.com", "Password1,");
+            Student student4 = new("Etudiant 4", "student4@mail.com", "Password1,");
+            Student student5 = new("Etudiant 5", "student5@mail.com", "Password1,");
+            Student student6 = new("Etudiant 6", "student6@mail.com", "Password1,");
+            Students.AddRange(new[] { student1, student2, student3, student4, student5, student6 });
             SaveChanges();
 
             string descriptionMap = "Bienvenue en MAP! : la boîte à outils théoriques pour une meilleure compréhension des principes de la programmation.\nDes maths, plein d'exos et du fun du fun du fun !!!";
             string descriptionSnet = "Le hacking pour les nuls...";
 
-            Course prw2 = new(ben, "PRW2", 0);
-            Course anc3 = new(bruno, "ANC3", 5);
-            Course prbd = new(ben, "PRBD", 5);
-            Course snet = new(alain, "SNET", 3, descriptionSnet);
-            Course map = new(ben, "MAP", 6, descriptionMap);
+            Course prw2 = new(teacher1, "PRW2", 0);
+            Course anc3 = new(teacher4, "ANC3", 5);
+            Course prbd = new(teacher1, "PRBD", 5);
+            Course snet = new(teacher2, "SNET", 3, descriptionSnet);
+            Course map = new(teacher1, "MAP", 6, descriptionMap);
             Courses.AddRange(new[] {
                 prw2, anc3, prbd, snet
             });
             SaveChanges();
 
-            Subscription s1 = new(damien, anc3, Subscription.Status.Active);
-            Subscription s2 = new(damien, prbd, Subscription.Status.Pending);
-            Subscription s3 = new(damien, snet, Subscription.Status.Inactive);
-            Subscription s4 = new(elise, prbd, Subscription.Status.Active);
-            Subscription s5 = new(remy, prbd, Subscription.Status.Active);
-            Subscription s6 = new(stan, prbd, Subscription.Status.Active);
-            Subscription s7 = new(clement, prbd, Subscription.Status.Active);
-            Subscription s8 = new(elise, map, Subscription.Status.Active);
-            Subscription s9 = new(remy, map, Subscription.Status.Pending);
-            Subscription s10 = new(stan, map, Subscription.Status.Pending);
-            Subscription s11 = new(damien, map, Subscription.Status.Active);
+            Subscription s1 = new(student2, anc3, Subscription.Status.Active);
+            Subscription s2 = new(student2, prbd, Subscription.Status.Pending);
+            Subscription s3 = new(student2, snet, Subscription.Status.Inactive);
+            Subscription s4 = new(student3, prbd, Subscription.Status.Active);
+            Subscription s5 = new(student4, prbd, Subscription.Status.Active);
+            Subscription s6 = new(student5, prbd, Subscription.Status.Active);
+            Subscription s7 = new(student1, prbd, Subscription.Status.Active);
+            Subscription s8 = new(student3, map, Subscription.Status.Active);
+            Subscription s9 = new(student4, map, Subscription.Status.Pending);
+            Subscription s10 = new(student5, map, Subscription.Status.Pending);
+            Subscription s11 = new(student2, map, Subscription.Status.Active);
             Subscriptions.AddRange(new[] { s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11 });
             SaveChanges();
 
@@ -279,9 +279,9 @@ namespace Moodle.Models {
             Quiz.Add(quiz3);
             SaveChanges();
 
-            Test test1 = new(damien, quiz1, new DateTime(2021, 3, 30));
-            Test test2 = new(elise, quiz1, new DateTime(2021, 4, 1));
-            Test test3 = new(damien, quiz2, new DateTime(2021, 5, 4));
+            Test test1 = new(student2, quiz1, new DateTime(2021, 3, 30));
+            Test test2 = new(student3, quiz1, new DateTime(2021, 4, 1));
+            Test test3 = new(student2, quiz2, new DateTime(2021, 5, 4));
             Tests.AddRange(new[] { test1, test2, test3 });
             SaveChanges();
 

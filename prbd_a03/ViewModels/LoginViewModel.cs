@@ -62,7 +62,7 @@ namespace Moodle.ViewModels {
 
         private void LoginStudentCommand() {
             LoginStudent = new RelayCommand(() => {
-                var user = User.GetByEmail("damien.raquet@mail.com");
+                var user = User.GetByEmail("student2@mail.com");
                 Login(user);
                 //LoggedUser.Login(user);
                 OnLoginSuccess?.Invoke();
@@ -71,7 +71,7 @@ namespace Moodle.ViewModels {
 
         private void LoginTeacherCommand() {
             LoginTeacher = new RelayCommand(() => {
-                var user = User.GetByEmail("bepenelle@epfc.eu");
+                var user = User.GetByEmail("teacher1@mail.eu");
                 Login(user);
                 //LoggedUser.Login(user);
                 OnLoginSuccess?.Invoke();
