@@ -23,7 +23,7 @@
 ## Screenshots
 
 <div display="flex" flex-direction="row" justify-content="space-around" align-items="center" flex-wrap="wrap">
-  <img alt="Screenshot" src="https://github.com/Xebache/MyMoodle/blob/main/docs/screenshots/login.png" width="80" />
+  <img alt="Screenshot" src="https://github.com/Xebache/MyMoodle/blob/main/docs/screenshots/login.png" width="85" />
   <img alt="Screenshot" src="https://github.com/Xebache/MyMoodle/blob/main/docs/screenshots/student_home.png" width="225" />
   <img alt="Screenshot" src="https://github.com/Xebache/MyMoodle/blob/main/docs/screenshots/teacher_questions.png" width="225" />
   <img alt="Screenshot" src="https://github.com/Xebache/MyMoodle/blob/main/docs/screenshots/teacher_grade.png" width="225" />
