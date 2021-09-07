@@ -1,0 +1,152 @@
+﻿<f:UserControlBase x:Name="uc"
+                   x:Class="Moodle.Views.Menu_Teacher_View"
+                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+                   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                   xmlns:f="clr-namespace:PRBD_Framework;assembly=PRBD_Framework"
+                   xmlns:vm="clr-namespace:Moodle.ViewModels"
+                   xmlns:v="clr-namespace:Moodle.Views"
+				   mc:Ignorable="d" 
+                   d:DesignHeight="700" 
+                   d:DesignWidth="150">
+
+    <UserControl.DataContext>
+        <vm:Menu_Teacher_ViewModel x:Name="vm"/>
+    </UserControl.DataContext>
+
+    <Grid x:Name="MenuLvCourseTeacher">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="525"/>
+            <RowDefinition Height="130"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        
+        <!-- Courses List -->
+        <StackPanel x:Name="MenuCourse"
+                      Grid.Column="0" 
+                      Grid.Row="0" 
+                      HorizontalAlignment="Left">
+
+            <ListView ItemsSource="{Binding Courses}" 
+                      Style="{DynamicResource ListViewMenu}"
+                      ItemContainerStyle="{DynamicResource LvItemContainerStyle}"
+                      SelectionMode="Single">
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <MenuItem Margin="-15 5 0 0"
+                                  Width="300">
+                            <!-- Display one Course -->
+                            <MenuItem.Header>
+                                <Grid Width="240" Margin="-25 0 0 0" Background="#2d4046">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="50"/>
+                                        <ColumnDefinition Width="50"/>
+                                        <ColumnDefinition Width="50"/>
+                                    </Grid.ColumnDefinitions>
+                                    
+                                    <!-- Course title -->
+                                    <StackPanel Grid.Row="0" Grid.ColumnSpan="3">
+                                        <TextBlock FontSize="20" 
+                                                   Foreground="#D38752"
+                                                   Text="{Binding Title}"
+                                                   Padding="0 10 0 10"
+                                                   HorizontalAlignment="Center"
+                                                   Cursor="Hand"/>
+                                        <Border Background="#B9BFC1" 
+                                                Height="1" 
+                                                HorizontalAlignment="Stretch"
+                                                Opacity="0.6" 
+                                                Margin="0 0 0 15"
+                                                Width="100"/>
+                                    </StackPanel>
+                                    
+                                    <!-- Subscriptions -->
+                                    <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" Margin="25 0 0 0">
+                                        <Button Style="{StaticResource statusButton_Teacher}" Background="Green" Margin="0 0 5 0"/>
+                                        <TextBlock Foreground="#B9BFC1" Text="{Binding NbActiveStudents}"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" Margin="15 0 0 0">
+                                        <Button Style="{StaticResource statusButton_Teacher}" Background="Orange" Margin="0 0 5 0"/>
+                                        <TextBlock Foreground="#B9BFC1" Text="{Binding NbPendingStudents}"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Horizontal">
+                                        <Button Style="{StaticResource statusButton_Teacher}" Background="Red" Margin="0 0 5 0"/>
+                                        <TextBlock Foreground="#B9BFC1" Text="{Binding NbInactiveStudents}"/>
+                                    </StackPanel>
+                                </Grid>
+                            </MenuItem.Header>
+
+                            <!-- ContextMenu -->
+                            <MenuItem.ContextMenu>
+                                <ContextMenu Margin="-40, 0, 0, 0" Background="#2d4046" BorderBrush="#2d4046">
+                                    <MenuItem Header="Inscriptions"  
+                                              Command="{Binding Source={x:Reference Name=uc}, Path=DataContext.SubscriptionsTeacher}"
+                                              CommandParameter="{Binding}"
+                                              Background="#2d4046"
+                                              Foreground="#B9BFC1"
+                                              Margin="40 0 0 0"
+                                              Padding="0 10 0 10">
+                                    </MenuItem>
+                                    <Separator/>
+                                    <MenuItem Header="Questions"  
+                                              Command="{Binding Source={x:Reference Name=uc}, Path=DataContext.QuestionsTeacher}"
+                                              CommandParameter="{Binding}"
+                                              Background="#2d4046"
+                                              Foreground="#B9BFC1"
+                                              Margin="40 0 0 0"
+                                              Padding="0 10 0 10">
+                                    </MenuItem>
+                                    <Separator/>
+                                    <MenuItem Header="Quiz"  
+                                              Command="{Binding Source={x:Reference Name=uc}, Path=DataContext.QuizTeacher}"
+                                              CommandParameter="{Binding}"
+                                              Background="#2d4046"
+                                              Foreground="#B9BFC1"
+                                              Margin="40 0 0 0"
+                                              Padding="0 10 0 10">
+                                    </MenuItem>
+                                    <Separator/>
+                                    <MenuItem Header="Notes" 
+                                              Command="{Binding Source={x:Reference Name=uc}, Path=DataContext.GradesTeacher}"
+                                              CommandParameter="{Binding}"
+                                              Background="#2d4046"
+                                              Foreground="#B9BFC1"
+                                              Margin="40 0 0 0"
+                                              Padding="0 10 0 10"/>
+                                </ContextMenu>
+                            </MenuItem.ContextMenu>
+                            
+                        </MenuItem>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+            </ListView>
+
+        </StackPanel>
+
+        <!-- New Course -->
+		<StackPanel Grid.Row="1"
+					Width="125">
+			<ContentControl>
+				<v:Menu_Teacher_NewCourse_View/>
+			</ContentControl>
+		</StackPanel>
+
+        <StackPanel Grid.Row="2" VerticalAlignment="Center">
+            <Button Content="Mes cours" 
+                    Command="{Binding CourseDetails}"
+                    Height="35" 
+                    Style="{DynamicResource mainButton}" 
+                    Width="130"
+                    Cursor="Hand"/>
+        </StackPanel>
+        
+    </Grid>
+
+</f:UserControlBase>

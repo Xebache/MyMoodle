@@ -1,0 +1,176 @@
+﻿<f:UserControlBase x:Class="Moodle.Views.Tab_Teacher_Grades_View"
+                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+                   xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+                   xmlns:f="clr-namespace:PRBD_Framework;assembly=PRBD_Framework"
+                   xmlns:local="clr-namespace:Moodle.Views" 
+                   xmlns:vm="clr-namespace:Moodle.ViewModels"
+                   mc:Ignorable="d" 
+                   d:DesignHeight="660" d:DesignWidth="1000">
+    <UserControl.DataContext>
+        <vm:Tab_Teacher_Grades_ViewModel x:Name="vm"/>
+    </UserControl.DataContext>
+
+
+
+    <Grid>
+        <Grid.Background>
+            <SolidColorBrush Color="White" Opacity="0.9"/>
+        </Grid.Background>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="15"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Header -->
+        <StackPanel Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3">
+            <TextBlock Text="Notes" 
+                       HorizontalAlignment="Center"
+                       FontFamily="Helvetica" 
+                       FontSize="30" 
+                       FontWeight="Light" />
+        </StackPanel>
+
+        <!-- LEFT : Results Total -->
+        <f:MyDataGrid Grid.Row="2" 
+                      Grid.Column="1" 
+                      RowHeaderWidth="0"
+                      BorderThickness="0"
+                      Background="Transparent"
+                      ItemsSource="{Binding DtTests}"
+                      AutoGenerateColumns="True"
+                      IsReadOnly="True"
+                      CanUserAddRows="False"
+                      SelectionMode="Single"
+                      CanUserResizeColumns="False" 
+                      CanUserResizeRows="False"
+                      ScrollViewer.VerticalScrollBarVisibility="Auto" 
+                      ScrollViewer.CanContentScroll="True"
+                      CellStyle="{DynamicResource CenterAlignedCell}"
+                      ColumnHeaderStyle="{DynamicResource ColumnHeaderStyle2}">
+        </f:MyDataGrid>
+
+        <!-- RIGHT -->
+        <Grid Grid.Column="3" Grid.Row="2" Background="#B9BFC1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="230"/>
+                <RowDefinition Height="230"/>
+            </Grid.RowDefinitions>
+
+            <!-- Combo quiz -->
+            <StackPanel Grid.Row="0" HorizontalAlignment="Center" Orientation="Horizontal" VerticalAlignment="Top" Margin="10 10 10 0">
+                <ComboBox x:Name="comboQuiz"
+                          Text="-- Choisir un test --"
+                          IsEditable="True"
+                          Width="235" 
+                          FontFamily="Helvetica"
+                          FontSize="15"
+                          FontWeight="Light"
+                          HorizontalContentAlignment="Center"
+                          VerticalContentAlignment="Center"
+                          Height="35"
+                          ItemsSource="{Binding Quiz}"
+                          DisplayMemberPath="Title"
+                          SelectedItem="{Binding QuizSelected}"/>
+
+                <ComboBox x:Name="combo"
+                          Text="-- Choisir une question --"
+                          IsEditable="True"
+                          Width="230" 
+                          FontFamily="Helvetica"
+                          FontSize="15"
+                          FontWeight="Light"
+                          HorizontalContentAlignment="Center"
+                          VerticalContentAlignment="Center"
+                          Height="35"
+                          ItemsSource="{Binding QuizSelected.QuizQuestions}"
+                          DisplayMemberPath="Question.Body"
+                          SelectedItem="{Binding QuizQuestionSelected}"
+                          Margin="10 0 0 0"
+                          IsEnabled="{Binding IsEnabled, ElementName=vm}"/>
+            </StackPanel>
+
+            <!-- Results / test -->
+            <f:MyDataGrid Grid.Row="1"
+                          RowHeaderWidth="0"
+                          ItemsSource="{Binding QuizSelected.Tests}"
+                          AutoGenerateColumns="false"
+                          IsReadOnly="True"
+                          CanUserAddRows="False"
+                          SelectionMode="Single"
+                          CanUserResizeColumns="False" 
+                          CanUserResizeRows="False"
+                          ScrollViewer.VerticalScrollBarVisibility="Auto" 
+                          ScrollViewer.CanContentScroll="True"
+                          Margin="10 5 10 15"
+                          ColumnHeaderStyle="{DynamicResource ColumnHeaderStyle1}">
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Titre" 
+                                        Binding="{Binding Path=Student.FullName}" 
+                                        Width="173" 
+                                        CanUserResize="False" 
+                                        CellStyle="{DynamicResource DataGridCellStyle}"/>
+                    <DataGridTextColumn Header="Note" 
+                                        Binding="{Binding Path=Result}" 
+                                        Width="50" CanUserResize="False" 
+                                        CellStyle="{DynamicResource DataGridCellStyleNoteColor}"/>
+                    <DataGridTextColumn Header="Note" 
+                                        Binding="{Binding Path=Quiz.Score}" 
+                                        Width="50" CanUserResize="False" 
+                                        CellStyle="{DynamicResource DataGridCellStyleNote}"/>
+                    <DataGridTextColumn Header="Date" 
+                                        Binding="{Binding Path=StartedAt, StringFormat=\{0:dd/MM/yyyy\}}" 
+                                        Width="100" CanUserResize="False" 
+                                        CellStyle="{DynamicResource DataGridCellStyleNote}"/>
+                    <DataGridTemplateColumn CellStyle="{DynamicResource DataGridCellStyleButton}">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Correction"
+                                        Command="{Binding GoToCorrection, ElementName=vm}"
+                                        CommandParameter="{Binding}"
+                                        Width="100"
+                                        Style="{DynamicResource gradeButton}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+
+            </f:MyDataGrid>
+
+            <!-- Result /Question -->
+            <f:MyDataGrid Grid.Row="2"
+                          RowHeaderWidth="0"
+                          ItemsSource="{Binding QuizQuestionSelected.Answers}"
+                          AutoGenerateColumns="False"
+                          IsReadOnly="True"
+                          CanUserAddRows="False"
+                          SelectionMode="Single"
+                          CanUserResizeColumns="False" 
+                          CanUserResizeRows="False"
+                          ScrollViewer.VerticalScrollBarVisibility="Auto" 
+                          ScrollViewer.CanContentScroll="True"
+                          Margin="10 0 10 0"
+                          ColumnHeaderStyle="{DynamicResource ColumnHeaderStyle1}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Nom" Binding="{Binding Path=Test.Student.FullName}" Width="160" CellStyle="{DynamicResource DataGridCellStyle}"/>
+                    <DataGridTextColumn Header="Réponse" Binding="{Binding Path=Choice.Body}" Width="237" CellStyle="{DynamicResource DataGridCellStyle}"/>
+                    <DataGridTextColumn Header="Correct" Binding="{Binding Path=Choice.Correct}" Width="75" CellStyle="{DynamicResource DataGridCellStyleNoteColor}"/>
+                </DataGrid.Columns>
+            </f:MyDataGrid>
+        </Grid>
+
+    </Grid>
+</f:UserControlBase>

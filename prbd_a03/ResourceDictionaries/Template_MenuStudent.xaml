@@ -1,0 +1,84 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:i="http://schemas.microsoft.com/xaml/behaviors">
+
+
+    <ControlTemplate x:Key="MenuStudent_ContextMenuBorder" 
+                     TargetType="ContextMenu">
+        <Border BorderThickness="0" 
+                BorderBrush="Transparent" 
+                Background="#162b32"/>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="MenuStudent_ContextMenu" 
+                     TargetType="ContextMenu">
+        <Border BorderThickness="0" 
+                BorderBrush="Transparent" 
+                Background="#162b32">
+            <StackPanel Orientation="Horizontal">
+                <StackPanel>
+                    <MenuItem Header="Quiz" 
+                              Foreground="#B9BFC1" 
+                              Padding="0 10 0 10">
+                        
+                    </MenuItem>
+                    <Separator/>
+                    <MenuItem Header="Grade" 
+                              Foreground="#B9BFC1" 
+                              Padding="0 10 0 10"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+    </ControlTemplate>
+
+    
+    <ControlTemplate x:Key="MenuStudent_Item" TargetType="HeaderedContentControl">
+        <Grid Width="100" Background="#2d4046">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="5"/>
+                    <ColumnDefinition Width="50"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" 
+                       FontSize="20" 
+                       Foreground="#D38752"
+                       Text="{Binding Course.Title}"/>
+                <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                    <Button Style="{DynamicResource statusButton}"/>
+                </StackPanel>
+            </Grid>
+            <StackPanel Grid.Row="1" 
+                    Grid.ColumnSpan="2" 
+                    Orientation="Vertical">
+                <TextBlock FontStyle="Italic" 
+                       Foreground="#B9BFC1" 
+                       Text="{Binding Course.Teacher}"/>
+                <Border Opacity="0.6" 
+                    Margin="-2 5 0 0" 
+                    Height="1" 
+                    Background="#B9BFC1"
+                    Width="100"/>
+            </StackPanel>
+        </Grid>
+    </ControlTemplate>
+
+    <ControlTemplate TargetType="{x:Type MenuItem}" x:Key="MenuItemTemplate">
+        <Border x:Name="Border" Padding="10,5,10,5" BorderThickness="0" Margin="0">
+            <ContentPresenter ContentSource="Header" x:Name="HeaderHost" RecognizesAccessKey="True" />
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsHighlighted" Value="true">
+                <Setter Property="Background" TargetName="Border" Value="Blue"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    
+
+
+
+</ResourceDictionary>

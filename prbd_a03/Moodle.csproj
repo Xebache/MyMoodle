@@ -1,0 +1,69 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <StartupObject>Moodle.App</StartupObject>
+	<DisableWinExeOutputInference>true</DisableWinExeOutputInference>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Models\Question.cs~RF133af74.TMP" />
+    <None Remove="Resources\back.png" />
+    <None Remove="Resources\brain.png" />
+    <None Remove="Resources\confirm.png" />
+    <None Remove="Resources\hamburger.png" />
+    <None Remove="Resources\lock.png" />
+    <None Remove="Resources\logout.png" />
+    <None Remove="Resources\mail.png" />
+    <None Remove="Resources\noBrain.png" />
+    <None Remove="Resources\up.png" />
+    <None Remove="Resources\user.png" />
+    <None Remove="Resources\V.png" />
+    <None Remove="Resources\X.png" />
+    <None Remove="ViewModels\Tab_Teacher_Questions_ViewModel.cs~RF198ff4e.TMP" />
+    <None Remove="ViewModels\Tab_Teacher_Quiz_ViewModel.cs~RFbd3af09.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.4" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PRBD_Framework\PRBD_Framework.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\back.png" />
+    <Resource Include="Resources\brain.png" />
+    <Resource Include="Resources\confirm.png" />
+    <Resource Include="Resources\hamburger.png" />
+    <Resource Include="Resources\lock.png" />
+    <Resource Include="Resources\logout.png" />
+    <Resource Include="Resources\mail.png" />
+    <Resource Include="Resources\noBrain.png" />
+    <Resource Include="Resources\up.png" />
+    <Resource Include="Resources\user.png" />
+    <Resource Include="Resources\V.png" />
+    <Resource Include="Resources\X.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+</Project>

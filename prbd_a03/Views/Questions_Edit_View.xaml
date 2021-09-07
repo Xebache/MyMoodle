@@ -1,0 +1,201 @@
+﻿<f:UserControlBase x:Class="Moodle.Views.Questions_Edit_View"
+                   x:Name="uc"
+                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+                   xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+                   xmlns:local="clr-namespace:Moodle.Views"
+                   xmlns:vm="clr-namespace:Moodle.ViewModels"
+                   xmlns:u="clr-namespace:Moodle.Utils"
+                   xmlns:f="clr-namespace:PRBD_Framework;assembly=PRBD_Framework" 
+                   xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
+                   d:DataContext="{d:DesignInstance Type=vm:Questions_Edit_ViewModel}"
+                   mc:Ignorable="d" 
+                   d:DesignHeight="660" d:DesignWidth="500">
+
+    <UserControl.Resources>
+        <u:BoolRadioConverter x:Key="BoolRadioConverter"/>
+        <u:CategoryToBool x:Key="CategoryToBool"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.Background>
+            <SolidColorBrush Color="#B9BFC1" Opacity="0.9"/>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="10"/>
+        </Grid.RowDefinitions>
+        
+        <Grid IsEnabled="{Binding IsEnabled}" Grid.Row="0">
+            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="150"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition/>
+                <RowDefinition Height="30"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="10"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Header -->
+            <StackPanel Grid.Row="1" Grid.Column="1">
+                <TextBlock Text="Éditer la question sélectionnée" 
+                           HorizontalAlignment="Left"
+                           FontFamily="Helvetica" 
+                           FontSize="22" 
+                           FontWeight="Light" />
+            </StackPanel>
+
+            <!-- TextBox Title -->
+            <StackPanel Grid.Row="2" Grid.Column="1" VerticalAlignment="Center">
+                <Label Content="Titre" FontSize="17"/>
+                <f:ValidatedField VerticalAlignment="Center">
+                    <TextBox x:Name="txtTitle" 
+                             Text="{Binding Body, UpdateSourceTrigger=PropertyChanged}"
+                             FontSize="15"
+                             Height="25"
+                             VerticalContentAlignment="Center"
+                             Padding="5 0 5 0"/>
+                </f:ValidatedField>
+            </StackPanel>
+
+            <!-- TextBox Answers -->
+            <StackPanel Grid.Row="3" Grid.Column="1">
+                <Label Content="Réponses" FontSize="17"/>
+                <f:ValidatedField VerticalAlignment="Center">
+                    <TextBox x:Name="txtAnswers" 
+                             Text="{Binding Answers, UpdateSourceTrigger=PropertyChanged}" 
+                             TextWrapping="Wrap" 
+                             AcceptsReturn="True"
+                             FontSize="15"
+                             Height="105"
+                             VerticalContentAlignment="Center"
+                             Padding="5"
+                             ScrollViewer.VerticalScrollBarVisibility="Visible"/>
+                </f:ValidatedField>
+            </StackPanel>
+
+            <!-- Type -->
+            <StackPanel Grid.Row="4" Grid.Column="1" Orientation ="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <RadioButton IsChecked="{Binding MultipleAnswers, UpdateSourceTrigger=PropertyChanged}" 
+                             Style="{DynamicResource pending}"
+                             GroupName="Multi"
+                             Content="Plusieurs réponses"/>
+                <RadioButton IsChecked="{Binding SimpleAnswer, UpdateSourceTrigger=PropertyChanged}" 
+                             Style="{DynamicResource pending}"
+                             GroupName="Multi"
+                             Content="Une seule réponse"
+                             Margin="25 0 0 0"/>
+            </StackPanel>
+
+            <!-- Categories -->
+            <StackPanel Grid.Row="5" Grid.Column="1">
+                <Label Content="Catégories" FontSize="17"/>
+                <StackPanel>
+                    <ListView x:Name="lvCategories"
+                              ItemsSource="{Binding CheckedCategories}"
+                              Padding="5" 
+                              Width="475"
+                              ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+
+                        <ListView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel></WrapPanel>
+                            </ItemsPanelTemplate>
+                        </ListView.ItemsPanel>
+
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="{x:Type ListViewItem}">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type ListViewItem}">
+                                            <ContentPresenter />
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <CheckBox Width="15" 
+                                              Margin="0 5 5 0" 
+                                              IsChecked="{Binding IsChecked, UpdateSourceTrigger=PropertyChanged}"/>
+                                    <TextBlock Text="{Binding Category.Title}" 
+                                               FontSize="15" 
+                                               Margin="0 4 10 0"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+
+                    </ListView>
+                    <Grid Margin="0 0 -1 0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="25"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox Grid.Column="0" 
+                                 Text="{Binding Category, UpdateSourceTrigger=PropertyChanged}" 
+                                 IsEnabled="{Binding IsEnabled}"
+                                 FontSize="15"
+                                 Height="25"
+                                 VerticalContentAlignment="Center"
+                                 Padding="5 0 5 0">
+                            <i:Interaction.Behaviors>
+                                <u:ClearOnFocusedBehavior/>
+                            </i:Interaction.Behaviors>
+                            <TextBox.InputBindings>
+                                <KeyBinding Command="{Binding AddCategory}" Key="Return" />
+                            </TextBox.InputBindings>
+                        </TextBox>
+                        <Button Grid.Column="1" Content="+" Width="25" Command="{Binding AddCategory}" DockPanel.Dock="Right"/>
+                    </Grid>
+                </StackPanel>
+            </StackPanel>
+
+        <!-- Bottom buttons -->
+            <UniformGrid Grid.Row="6" Grid.Column="1" Columns="3" Rows="1">
+                <UniformGrid.Resources>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Margin" Value="10"/>
+                    </Style>
+                </UniformGrid.Resources>
+                <Button Style="{DynamicResource appButton}" 
+                        Command="{Binding Save}"
+                        Content="Enregistrer"
+                        Width="110" 
+                        Height="30"
+                        IsEnabled="{Binding IsEnabled}"/>
+                <Button Style="{DynamicResource appButton}" 
+                        Command="{Binding Cancel}"
+                        Content="Annuler"
+                        Width="110" 
+                        Height="30"
+                        IsEnabled="{Binding IsEnabled}"/>
+                <Button Style="{DynamicResource appButton}" 
+                        Command="{Binding Delete}"
+                        Content="Supprimer"
+                        Width="110" 
+                        Height="30"
+                        IsEnabled="{Binding IsEnabled}"/>
+            </UniformGrid>
+        </Grid>
+        
+        <StackPanel Grid.Row="1" HorizontalAlignment="Center" 
+                    VerticalAlignment="Bottom">
+            <Button Style="{DynamicResource loggedButton}" 
+                    Command="{Binding NewQuestion}"
+                    Content="Nouvelle question"
+                    Width="175" 
+                    Height="30"/>
+        </StackPanel>
+    </Grid>
+</f:UserControlBase>

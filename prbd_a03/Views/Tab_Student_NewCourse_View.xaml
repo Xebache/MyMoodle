@@ -1,0 +1,131 @@
+﻿<f:UserControlBase x:Class="Moodle.Views.Tab_Student_NewCourse_View"
+                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+                   xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+                   xmlns:local="clr-namespace:Moodle.Views"
+                   xmlns:vm="clr-namespace:Moodle.ViewModels"
+                   xmlns:f="clr-namespace:PRBD_Framework;assembly=PRBD_Framework" 
+                   xmlns:u="clr-namespace:Moodle.Utils"
+                   mc:Ignorable="d" 
+                   d:DesignHeight="660" d:DesignWidth="1000">
+    <UserControl.DataContext>
+        <vm:Tab_Student_NewCourse_ViewModel x:Name="vm"/>
+    </UserControl.DataContext>
+
+    <UserControl.Resources>
+        <u:BoolToCollapseConverter x:Key="BoolToCollapse"/>
+        <f:BoolToVisibleConverter x:Key="BoolToVisible"/>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.Background>
+            <SolidColorBrush Color="White" Opacity="0.9"/>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="40"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="40"/>
+        </Grid.ColumnDefinitions>
+		
+		<!-- Header -->
+        <StackPanel Grid.Column="1" 
+                    Grid.Row="1"
+					VerticalAlignment="Center">
+                <TextBlock Text="Choisissez le cours auquel vous voulez souscrire:" 
+                           FontFamily="helvetica"
+                           FontSize="20"
+                           Foreground="#2F2F2F"
+                           HorizontalAlignment="Center"/>
+        </StackPanel>
+		
+		<!-- Courses List -->
+        <Grid Grid.Column="1" 
+              Grid.Row="2" 
+              HorizontalAlignment="Center"
+              Margin="10 50 10 50"
+              VerticalAlignment="Center"
+              >
+            <ListView x:Name="listView" 
+                      ItemsSource="{Binding CoursesToSubscribeTo}" 
+                      Background="Transparent"
+                      BorderBrush="Transparent"
+                      ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel></WrapPanel>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Background="#2d4046" 
+                                    Height="80" 
+                                    Margin="15"
+                                    Width="140">
+                            <TextBlock FontSize="20" 
+                                       Foreground="#fca66a" 
+                                       Margin="20 10 20 0" 
+                                       Text="{Binding Title}"/>
+                            <TextBlock FontStyle="Italic" 
+                                       Foreground="#B9BFC1" 
+                                       Margin="20 0" 
+                                       Text="{Binding Teacher}"/>
+                            <Border Width="109" 
+                                    Opacity="0.6" 
+                                    Margin="-2 5 0 0" 
+                                    Height="1" 
+                                    Background="#B9BFC1"/>
+                            <TextBlock FontSize="10"
+                                       Foreground="#fca66a" 
+                                       Text="COMPLET"
+                                       Margin="0 5 0 0"
+                                       HorizontalAlignment="Center" 
+                                       Visibility="{Binding IsComplete, Converter={StaticResource BoolToVisible}}"/>
+                            <StackPanel Orientation="Horizontal" 
+                                        HorizontalAlignment="Center" 
+                                        Margin="0 5 0 0" 
+                                        Visibility="{Binding IsComplete, Converter={StaticResource BoolToCollapse}}">
+                                <TextBlock FontSize="10" 
+                                           Foreground="#B9BFC1" 
+                                           Text="Disponible : "/>
+                                <TextBlock FontSize="10" 
+                                           Foreground="#B9BFC1" 
+                                           Text="{Binding NbAvailable}"/>
+                                <TextBlock FontSize="10" 
+                                           Foreground="#B9BFC1" 
+                                           Text=" / "/>
+                                <TextBlock FontSize="10" 
+                                           Foreground="#B9BFC1" 
+                                           Text="{Binding Capacity}"/>
+                            </StackPanel>
+
+
+
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+            </ListView>
+        </Grid>
+		
+		<!-- Bottom button -->
+        <StackPanel Grid.Column="1" Grid.Row="3">
+            <Button Content="Enregistrer" 
+                    Command="{Binding RegisterCourse}"
+                    CommandParameter="{Binding ElementName=listView, Path=SelectedItem}"
+                    Style="{DynamicResource loginButton}" 
+                    Height="40" 
+                    Margin="30 0 30 0"
+                    Width="120"/>
+        </StackPanel>
+    </Grid>
+</f:UserControlBase>

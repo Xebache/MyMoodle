@@ -1,0 +1,87 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+
+    <Style TargetType="{x:Type TabItem}">
+        <Setter Property="FontFamily" Value="helvetica"/>
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TabItem}">
+                    <Grid Background="#2d4046" 
+                              Height="30" 
+                              Margin="0 0 4 0"
+                              Width="120">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="28"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="105"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Header -->
+                        <StackPanel Grid.Row="0" 
+                                    Grid.Column="0"
+                                    Margin="5 0 0 0"
+                                    VerticalAlignment="Center">
+                            <TextBlock x:Name="Header" 
+                                       Foreground="#ffffff" 
+                                       HorizontalAlignment="Left" 
+                                       VerticalAlignment="Center" 
+                                       Text="{TemplateBinding Header}"
+                                       FontSize="11"/>
+                        </StackPanel>
+                        
+                        <!-- Button Close -->
+                        <StackPanel Grid.Row="0" 
+                                    Grid.Column="2"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center">
+                            <Button Style="{DynamicResource menuButton}"  
+                                    Command="{Binding QuitTab}" 
+                                    CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=TabItem}}">
+                                <Image Source="/Resources/X.png" 
+                                       Width="10"/>
+                            </Button>
+                        </StackPanel>
+
+                        <!-- Orange Border when triggered -->
+                        <StackPanel Grid.Row="1" Grid.ColumnSpan="2">
+                            <Border x:Name="borderFocused" 
+                                    Background="#fca66a" 
+                                    Height="4" 
+                                    Width="auto" 
+                                    VerticalAlignment="Center" 
+                                    Visibility="Hidden"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <!-- When tab gets focus -->
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="Header" 
+                                    Property="FontWeight" 
+                                    Value="Bold" />
+                            <Setter TargetName="Header" 
+                                    Property="Foreground" 
+                                    Value="#fca66a" />
+                            <Setter TargetName="borderFocused" 
+                                    Property="Visibility" 
+                                    Value="Visible"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" 
+                                 Value="False">
+                            <Setter TargetName="Header" 
+                                    Property="Foreground" 
+                                    Value="#B9BFC1" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

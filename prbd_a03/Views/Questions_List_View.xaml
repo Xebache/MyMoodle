@@ -1,0 +1,144 @@
+﻿<f:UserControlBase  x:Class="Moodle.Views.Questions_List_View"
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+                    xmlns:f="clr-namespace:PRBD_Framework;assembly=PRBD_Framework" 
+                    xmlns:local="clr-namespace:Moodle.Views" 
+                    xmlns:vm="clr-namespace:Moodle.ViewModels" 
+                    xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
+                    xmlns:u="clr-namespace:Moodle.Utils" 
+                    d:DataContext="{d:DesignInstance Type=vm:Questions_List_ViewModel}"
+                    mc:Ignorable="d" 
+                    d:DesignHeight="660" d:DesignWidth="500">
+
+    
+
+    <UserControl.Resources>
+        <f:BoolToVisibleConverter x:Key="BoolToVisibleConverter"/>
+        <u:BoolToCollapseConverter x:Key="BoolToCollapseConverter"/>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+
+        <!-- Header -->
+        <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center">
+            <TextBlock Text="Questions Disponibles (" FontFamily="Helvetica" FontSize="22" FontWeight="Light" />
+            <TextBlock Text="{Binding NbSelected}" FontFamily="Helvetica" FontSize="22" FontWeight="Light" />
+            <TextBlock Text="/" FontFamily="Helvetica" FontSize="22" FontWeight="Light" />
+            <TextBlock Text="{Binding NbAvailable}" FontFamily="Helvetica" FontSize="22" FontWeight="Light" />
+            <TextBlock Text=")" FontFamily="Helvetica" FontSize="22" FontWeight="Light" />
+        </StackPanel>
+
+
+        <!-- Categories -->
+        <StackPanel Grid.Row="0">
+            <ListView x:Name="lvCourseCategories" 
+                      ItemsSource="{Binding Categories}"
+                      SelectionMode="Multiple" 
+                      Padding="7"
+                      BorderBrush="Transparent"
+                      ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel></WrapPanel>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="{x:Type ListViewItem}">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type ListViewItem}">
+                                    <ContentPresenter />
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListView.ItemContainerStyle>
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <CheckBox x:Name="checkbox" 
+                                  Content="{Binding Title}" 
+                                  IsChecked="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}"
+                                  FontSize="15"
+                                  Margin="0 5 15 5">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Checked">
+                                    <i:InvokeCommandAction Command="{Binding ElementName=lvCourseCategories, Path=DataContext.CategorySelected}"
+                                                           CommandParameter="{Binding}"/>
+                                </i:EventTrigger>
+                                <i:EventTrigger EventName="Unchecked">
+                                    <i:InvokeCommandAction Command="{Binding ElementName=lvCourseCategories, Path=DataContext.CategorySelected}"
+                                                           CommandParameter="{Binding}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </CheckBox>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
+
+        <!-- Questions List -->
+        <StackPanel Grid.Row="2">
+            <ListView x:Name="lvQuestions" 
+                      ItemsSource="{Binding FilteredQuestions}"
+                      ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                      ScrollViewer.VerticalScrollBarVisibility="Auto"
+                      Height="422"
+                      SelectionMode="Single" 
+                      SelectedItem="{Binding SelectedItem}"
+                      BorderBrush="Transparent">
+
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Margin="0 10 0 0">
+                            <TextBlock Text="{Binding Body}" 
+                                       TextWrapping="Wrap" 
+                                       FontWeight="DemiBold"/>
+
+
+                            <!-- Answers -->
+                            <ListView x:Name="lvChoices"  
+                                      ItemsSource="{Binding Choices}"  
+                                      BorderThickness="0"
+                                      Width="450" 
+                                      Background="Transparent"
+                                      IsHitTestVisible="False"
+                                      ScrollViewer.HorizontalScrollBarVisibility="Hidden">
+
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal" 
+                                                    Margin="0 3 0 0" 
+                                                    HorizontalAlignment="Left">
+                                            <CheckBox Margin="5 0 5 0" 
+                                                      Visibility="{Binding Path=Question.MultipleAnswers, Converter={StaticResource BoolToVisibleConverter}}"
+                                                      IsChecked="{Binding Correct}"/>
+                                            <RadioButton Margin="5 0 5 0" 
+                                                         Visibility="{Binding Path=Question.MultipleAnswers, Converter={StaticResource BoolToCollapseConverter}}" 
+                                                         IsChecked="{Binding Correct}"/>
+                                            <TextBlock Text="{Binding Body}" 
+                                                       TextWrapping="Wrap" 
+                                                       Width="400"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
+    </Grid>
+
+</f:UserControlBase>

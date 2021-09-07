@@ -1,0 +1,21 @@
+﻿<f:ApplicationBase x:Class="Moodle.App"
+                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:f="clr-namespace:PRBD_Framework;assembly=PRBD_Framework"
+                   StartupUri="Views/LoginView.xaml">
+    
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="ResourceDictionaries/Style_Buttons.xaml"/>
+                <ResourceDictionary Source="ResourceDictionaries/Style_Menu.xaml"/>
+                <ResourceDictionary Source="ResourceDictionaries/Style_TabControl.xaml"/>
+                <ResourceDictionary Source="ResourceDictionaries/Style_Text.xaml"/>
+                <ResourceDictionary Source="ResourceDictionaries/Template_MenuStudent.xaml"/>
+                <ResourceDictionary Source="ResourceDictionaries/Style_RadioButtons.xaml"/>
+                <ResourceDictionary Source="ResourceDictionaries/Style_ComboBox.xaml"/>
+                <ResourceDictionary Source="ResourceDictionaries/Style_DataGrid.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</f:ApplicationBase>

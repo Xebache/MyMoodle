@@ -1,0 +1,116 @@
+﻿<f:UserControlBase x:Class="Moodle.Views.Tab_Student_Subscriptions_View"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Moodle.Views"
+             xmlns:vm="clr-namespace:Moodle.ViewModels"
+             xmlns:u="clr-namespace:Moodle.Utils"
+             xmlns:f="clr-namespace:PRBD_Framework;assembly=PRBD_Framework" 
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             mc:Ignorable="d" 
+             d:DesignHeight="660" d:DesignWidth="1000">
+    <UserControl.DataContext>
+        <vm:Tab_Student_Subscriptions_ViewModel x:Name="vm"/>
+    </UserControl.DataContext>
+    <UserControl.Resources>
+        <u:StatusToLabelConverter x:Key="StatusToLabel"/>
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
+    </UserControl.Resources>
+
+    
+
+    <Grid x:Name="SubscriptionsStudent"
+          Background="#ffffff" 
+          Opacity="0.9">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="35"/>
+			<RowDefinition/>
+			<RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+		
+		<!-- Header -->
+		<StackPanel Grid.Column="1" 
+                    Grid.Row="1"
+					VerticalAlignment="Center">
+			<TextBlock Text="Liste de vos cours :" 
+                       FontFamily="helvetica"
+                       FontSize="20"
+                       Foreground="#2F2F2F"
+                       HorizontalAlignment="Center"/>
+		</StackPanel> 
+		
+		<!-- Courses List -->
+        <Grid Grid.Column="1" 
+			  Grid.Row="2" 
+			  Margin="-50 -100 0 0"
+			  HorizontalAlignment="Center"
+			  VerticalAlignment="Center">
+            
+            <ListView x:Name="listView" 
+                      ItemsSource="{Binding Subscriptions}"
+                      ItemContainerStyle="{DynamicResource LvItemContainerStyle}"
+                      Background="Transparent"
+                      BorderBrush="Transparent"
+                      ScrollViewer.VerticalScrollBarVisibility="Disabled"
+					  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                      Height="300">
+
+				<ListView.ItemsPanel>
+					<ItemsPanelTemplate>
+						<WrapPanel></WrapPanel>
+					</ItemsPanelTemplate>
+				</ListView.ItemsPanel>
+
+				<ListView.ItemTemplate>
+                    <DataTemplate>
+						<Grid Margin="75 25 0 0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Grid.Column="0" Background="#2d4046" 
+                                        Height="80"
+                                        Width="140">
+                                <TextBlock FontSize="20" 
+                                           Foreground="#fca66a" 
+                                           Margin="20 10 20 0" 
+                                           Text="{Binding Course.Title}"/>
+                                <TextBlock FontStyle="Italic" 
+                                           Foreground="#B9BFC1" 
+                                           Margin="20 0" 
+                                           Text="{Binding Course.Teacher}"/>
+                                <Border Width="109" 
+                                        Opacity="0.6" 
+                                        Margin="-2 5 0 0" 
+                                        Height="1" 
+                                        Background="#B9BFC1"/>
+                                
+                            </StackPanel>
+                            
+                            <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                                <Button Style="{StaticResource loginButton}"
+                                        Command="{Binding Resubscribe, ElementName=vm}"
+                                        CommandParameter="{Binding}"
+                                        Content="{Binding SubscriptionStatus, Converter={StaticResource StatusToLabel}}"
+                                        Margin="10 0 0 0"
+                                        Height="40" 
+                                        Width="150"/>
+
+                            </StackPanel>
+                            
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            
+        </Grid>
+    </Grid>
+</f:UserControlBase>

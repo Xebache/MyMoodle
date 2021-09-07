@@ -1,0 +1,201 @@
+﻿<f:UserControlBase x:Class="Moodle.Views.Tab_Student_Test_View"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Moodle.Views" 
+             xmlns:vm="clr-namespace:Moodle.ViewModels" 
+             xmlns:u="clr-namespace:Moodle.Utils" 
+             xmlns:f="clr-namespace:PRBD_Framework;assembly=PRBD_Framework"
+             mc:Ignorable="d" 
+             d:DesignHeight="660" d:DesignWidth="1000">
+
+    <UserControl.DataContext>
+        <vm:Tab_Student_Test_ViewModel x:Name="vm"/>
+    </UserControl.DataContext>
+
+    <UserControl.Resources>
+        <f:BoolToVisibleConverter x:Key="BoolToVisibleConverter"/>
+        <u:BoolRadioConverter x:Key="BoolRadioConverter"/>
+        <u:IncrementIndexConverter x:Key="IncrementIndexConverter"/>
+        <u:NullToZIndexConverter x:Key="NullToZIndexConverter"/>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.Background>
+            <SolidColorBrush Color="White" Opacity="0.9"/>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="45"/>
+            <RowDefinition Height="75"/>
+            <RowDefinition Height="400"/>
+            <RowDefinition/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Header -->
+        <StackPanel Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3">
+            <TextBlock Text="{Binding Test.Quiz.Title}" 
+                       HorizontalAlignment="Center"
+                       FontFamily="Helvetica" FontSize="30" FontWeight="Light" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Grid.Column="1">
+            <ListView x:Name="lvTest" 
+                      ItemsSource="{Binding QuizQuestions}"
+                      SelectionMode="Single"
+                      AlternationCount="{Binding Path=QuizQuestions.Count}"
+                      BorderBrush="Transparent" 
+                      Padding="10"
+                      Height="68"
+                      MouseUp="SelectedItem_MouseUp">
+
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel></WrapPanel>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <Border BorderThickness="1" 
+                                    BorderBrush="Gray" 
+                                    Padding="10" 
+                                    Width="40" 
+                                    Height="40">
+                                <TextBlock Margin="5 0 0 0" 
+                                           Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplatedParent.(ItemsControl.AlternationIndex), Converter={StaticResource IncrementIndexConverter}}"/>
+                            </Border>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
+
+        <StackPanel Grid.Row="3" Grid.Column="1" Width="450" Height="340" Panel.ZIndex="{Binding SelectedQuestion, Converter={StaticResource NullToZIndexConverter}}">
+            <TextBlock TextWrapping="Wrap"
+                       FontSize="15"
+                       Height="200"
+                       Padding="5">
+                Enregistrez vos réponses avant de passer à la question suivante.<LineBreak/><LineBreak/><Span Foreground="#ffaf4b">!!! N'oubliez pas de valider le test !!!</Span><LineBreak/><LineBreak/>Tant que le test est valide, vous pourrez modifier vos réponses.<LineBreak/><LineBreak/>Bon travail!
+            </TextBlock>
+        </StackPanel>
+        
+        <!-- Selected question -->
+        <Grid Grid.Row="3" Grid.Column="1" Width="500" Background="White" Margin="0 10 0 0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="340"/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0">
+                <ListView x:Name="lvQuestions" 
+                          ItemsSource="{Binding SelectedQuestion}" 
+                          Width="450" 
+                          ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
+                          Background="Transparent" 
+                          BorderThickness="0"
+                          ItemContainerStyle="{DynamicResource LvItemContainerStyle}">
+
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="300"/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                
+                                <!-- Question -->
+                                <StackPanel Grid.Row="0" Margin="0 20 0 0">
+                                    <TextBlock Text="{Binding Question.Body}" 
+                                               Width="420"
+                                               TextWrapping="Wrap" 
+                                               FontWeight="DemiBold"/>
+
+                                    <!-- Answers -->
+                                    <ListView x:Name="lvChoices"  
+                                              ItemsSource="{Binding Question.Choices}"  
+                                              BorderThickness="0"
+                                              Width="450" 
+                                              Background="Transparent"
+                                              ItemContainerStyle="{DynamicResource LvItemContainerStyle}"
+                                              SelectionMode="Single">
+
+                                        <ListView.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackPanel>
+                                                    <StackPanel Orientation="Horizontal" 
+                                                        Margin="0 5 0 0">
+                                                        <CheckBox Margin="5 0 5 0" 
+                                                                  Visibility="{Binding Path=Question.MultipleAnswers, Converter={StaticResource BoolToVisibleConverter}}" 
+                                                                  IsChecked="{Binding Selected}"
+                                                                  Checked="Checkbox_Checked"
+                                                                  Unchecked="Checkbox_Unchecked"/>
+                                                        <RadioButton Margin="5 0 5 0" 
+                                                                     Visibility="{Binding Path=Question.SimpleAnswer, Converter={StaticResource BoolToVisibleConverter}}"
+                                                                     IsChecked="{Binding Selected}"
+                                                                     GroupName="{Binding ElementName=lvChoices, Path=DataContext.Question.QuestionID}" 
+                                                                     Checked="RadioButton_Checked"/>
+                                                        <TextBlock Text="{Binding Body}" 
+                                                                   TextWrapping="Wrap" 
+                                                                   Width="375"/>
+                                                    </StackPanel>
+
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </ListView.ItemTemplate>
+                                    </ListView>
+                                </StackPanel>
+
+                                <!-- Points -->
+                                <StackPanel Grid.Row="1" HorizontalAlignment="Right" Orientation="Horizontal">
+                                    <TextBlock Text="{Binding Points}" FontSize="15"/>
+                                    <TextBlock Text=" Points" FontSize="15"/>
+                                </StackPanel>
+                            </Grid>
+                            
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackPanel>
+            <!-- previous next ???
+            <StackPanel Grid.Row="1">
+                <Button Style="{DynamicResource loginButton}"
+                        Command="{Binding Save}"
+                        Content="Enregistrer la réponse" 
+                        Width="250" 
+                        Height="30"/>
+            </StackPanel>
+            -->
+        </Grid>
+        
+
+        <StackPanel Grid.Row="4" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Style="{DynamicResource appButton}" 
+                    Command="{Binding Save}"
+                    Content="Enregistrer les réponses" 
+                    Margin="0 20 0 0" 
+                    Height="30" 
+                    Width="300" 
+                    FontSize="20"/>
+
+            <Button Style="{DynamicResource appButton}" 
+                    Command="{Binding ValidateTest}"
+                    CommandParameter="{Binding Test, ElementName=vm}"
+                    Content="Valider et Quitter" 
+                    Margin="25 20 0 0" 
+                    Height="30" 
+                    Width="225" 
+                    FontSize="20"/>
+
+        </StackPanel>
+
+    </Grid>
+</f:UserControlBase>

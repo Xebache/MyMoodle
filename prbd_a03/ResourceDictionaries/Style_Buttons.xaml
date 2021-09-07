@@ -1,0 +1,444 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+                    xmlns:i="http://schemas.microsoft.com/xaml/behaviors">
+                    
+    
+    <Style TargetType="{x:Type Button}" x:Key="loginButton">
+        <Setter Property="Foreground" 
+                Value="#162b32"/>
+        <Setter Property="FontFamily" 
+                Value="helvetica"/>
+        <Setter Property="FontSize"
+                Value="20"/>
+        <Setter Property="FontWeight" 
+                Value="Light"/>
+        <Setter Property="Background" 
+                Value="Transparent"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" 
+                            CornerRadius="20"
+                            BorderThickness="1"
+                            BorderBrush="#B9BFC1">
+                        <ContentPresenter HorizontalAlignment="Center" 
+                                          VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" 
+                     Value="True">
+                <Setter Property="Background" 
+                        Value="#B9BFC1"/>
+                <Setter Property="Opacity" 
+                        Value="0.6"/>
+                <Setter Property="FontWeight" 
+                        Value="SemiBold"/>
+                <Setter Property="Foreground" 
+                        Value="#FC8431"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+
+    <Style TargetType="{x:Type Button}" x:Key="loggedButton">
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Foreground" 
+                Value="#56666a"/>
+        <Setter Property="FontFamily" 
+                Value="helvetica"/>
+        <Setter Property="FontSize"
+                Value="17"/>
+        <Setter Property="FontWeight" 
+                Value="Light"/>
+        <Setter Property="Background" 
+                Value="Transparent"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" 
+                            CornerRadius="20"
+                            BorderThickness="1"
+                            BorderBrush="#56666a">
+                        <ContentPresenter HorizontalAlignment="Center" 
+                                          VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <Style TargetType="{x:Type Button}" x:Key="appButton">
+        <Setter Property="Foreground" 
+                Value="#ffaf4b"/>
+        <Setter Property="FontFamily" 
+                Value="helvetica"/>
+        <Setter Property="FontSize"
+                Value="15"/>
+        <Setter Property="FontWeight" 
+                Value="SemiBold"/>
+        <Setter Property="Background" 
+                Value="#6c797d"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" 
+                            CornerRadius="20"
+                            BorderThickness="1"
+                            BorderBrush="#6c797d">
+                        <ContentPresenter HorizontalAlignment="Center" 
+                                          VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" 
+                     Value="True">
+                <Setter Property="Background" 
+                        Value="Transparent"/>
+                <Setter Property="Opacity" 
+                        Value="0.6"/>
+                <Setter Property="FontWeight" 
+                        Value="Light"/>
+                <Setter Property="Foreground" 
+                        Value="#56666a"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+
+    <Style TargetType="{x:Type Button}" x:Key="updateButton">
+        <Setter Property="Foreground" 
+                Value="#56666a"/>
+        <Setter Property="FontFamily" 
+                Value="helvetica"/>
+        <Setter Property="FontSize"
+                Value="15"/>
+        <Setter Property="FontWeight" 
+                Value="Light"/>
+        <Setter Property="Background" 
+                Value="Transparent"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" 
+                            CornerRadius="20"
+                            BorderThickness="1"
+                            BorderBrush="#56666a">
+                        <ContentPresenter HorizontalAlignment="Center" 
+                                          VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" 
+                     Value="True">
+                <Setter Property="Background" 
+                        Value="#56666a"/>
+                <Setter Property="Opacity" 
+                        Value="0.6"/>
+                <Setter Property="FontWeight" 
+                        Value="Light"/>
+                <Setter Property="Foreground" 
+                        Value="#ffaf4b"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+
+    <Style TargetType="{x:Type Button}" x:Key="comboButton">
+        <Setter Property="Foreground" 
+                Value="#162b32"/>
+        <Setter Property="FontFamily" 
+                Value="helvetica"/>
+        <Setter Property="FontSize"
+                Value="15"/>
+        <Setter Property="FontWeight" 
+                Value="Light"/>
+        <Setter Property="Background" 
+                Value="Transparent"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" 
+                            CornerRadius="0 20 20 0"
+                            BorderThickness="1"
+                            BorderBrush="#162b32">
+                        <ContentPresenter HorizontalAlignment="Center" 
+                                          VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" 
+                     Value="True">
+                <Setter Property="Background" 
+                        Value="#6c797d"/>
+                <Setter Property="FontWeight" 
+                        Value="SemiBold"/>
+                <Setter Property="Foreground" 
+                        Value="#ffaf4b"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+
+    <Style TargetType="ComboBox" x:Key="combo">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Border CornerRadius="20 0 0 20" 
+                            BorderThickness="1"
+                            BorderBrush="#162b32"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        
+    </Style>
+    
+
+    <Style TargetType="{x:Type Button}" 
+           x:Key="menuButton">
+        <Setter Property="Background" 
+                Value="Transparent"/>
+        <Setter Property="Cursor" 
+                Value="Hand"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid Background="{TemplateBinding Background}">
+                        <ContentPresenter />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    
+    <Style TargetType="{x:Type Button}" x:Key="mainButton">
+        <Setter Property="Foreground" 
+                Value="#D38752"/>
+        <Setter Property="FontFamily" 
+                Value="helvetica"/>
+        <Setter Property="FontSize" 
+                Value="15"/>
+        <Setter Property="FontWeight" 
+                Value="Light"/>
+        <Setter Property="Background" 
+                Value="Transparent"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" 
+                            CornerRadius="20"
+                            BorderThickness="1"
+                            BorderBrush="#56666a">
+                        <ContentPresenter HorizontalAlignment="Center" 
+                                          VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" 
+                     Value="True">
+                <Setter Property="Background" 
+                        Value="#B9BFC1"/>
+                <Setter Property="Opacity" 
+                        Value="0.6"/>
+                <Setter Property="FontWeight"
+                        Value="SemiBold"/>
+                <Setter Property="Foreground"
+                        Value="#FC8431"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    
+    <Style TargetType="{x:Type Button}" 
+           x:Key="listViewButton">
+        <Setter Property="Foreground" 
+                Value="#162b32"/>
+        <Setter Property="FontFamily" 
+                Value="helvetica"/>
+        <Setter Property="FontSize" 
+                Value="20"/>
+        <Setter Property="FontWeight" 
+                Value="Light"/>
+        <Setter Property="Foreground" 
+                Value="#D38752"/>
+        <Setter Property="Background" 
+                Value="Transparent"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid Background="{TemplateBinding Background}">
+                        <ContentPresenter />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" 
+                     Value="True">
+                <Setter Property="Foreground" 
+                        Value="#FC8431"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+
+    <Style TargetType="{x:Type Button}" 
+           x:Key="statusButton_Student">
+        <Setter Property="Background" 
+                Value="Transparent"/>
+        <Setter Property="Width" 
+                Value="7"/>
+        <Setter Property="Height" 
+                Value="7"/>
+        <Setter Property="HorizontalAlignment" 
+                Value="Center"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" 
+                            CornerRadius="20"
+                            BorderThickness="1"
+                            BorderBrush="Transparent">
+                        <ContentPresenter HorizontalAlignment="Center" 
+                                          VerticalAlignment="Center"/>
+                        <i:Interaction.Triggers>
+                            <i:DataTrigger Binding="{Binding SubscriptionStatus}" 
+                                           Value="Active">
+                                <i:ChangePropertyAction PropertyName="Background" 
+                                                        Value="#008000"/>
+                            </i:DataTrigger>
+                            <i:DataTrigger Binding="{Binding SubscriptionStatus}" 
+                                           Value="Pending">
+                                <i:ChangePropertyAction PropertyName="Background" 
+                                                        Value="#FFA500"/>
+                            </i:DataTrigger>
+                            <i:DataTrigger Binding="{Binding SubscriptionStatus}" 
+                                           Value="Inactive">
+                                <i:ChangePropertyAction PropertyName="Background" 
+                                                        Value="#FF0000"/>
+                            </i:DataTrigger>
+                        </i:Interaction.Triggers>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type Button}" 
+           x:Key="statusButton_Teacher">
+        <Setter Property="Background" 
+                Value="Transparent"/>
+        <Setter Property="Width" 
+                Value="7"/>
+        <Setter Property="Height" 
+                Value="7"/>
+        <Setter Property="HorizontalAlignment" 
+                Value="Center"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" 
+                            CornerRadius="20"
+                            BorderThickness="1"
+                            BorderBrush="Transparent">
+                        <ContentPresenter HorizontalAlignment="Center" 
+                                          VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <Style TargetType="{x:Type Button}" x:Key="subscriptionButton">
+        <Setter Property="Foreground" 
+                Value="#162b32"/>
+        <Setter Property="FontFamily" 
+                Value="helvetica"/>
+        <Setter Property="FontSize"
+                Value="20"/>
+        <Setter Property="FontWeight" 
+                Value="Light"/>
+        <Setter Property="Background" 
+                Value="Transparent"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" 
+                            CornerRadius="20"
+                            BorderThickness="1"
+                            BorderBrush="#B9BFC1">
+                        <ContentPresenter HorizontalAlignment="Center" 
+                                          VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" 
+                     Value="True">
+                <Setter Property="Background" 
+                        Value="#B9BFC1"/>
+                <Setter Property="Opacity" 
+                        Value="0.6"/>
+                <Setter Property="FontWeight" 
+                        Value="SemiBold"/>
+                <Setter Property="Foreground" 
+                        Value="#FC8431"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style TargetType="{x:Type Button}" x:Key="gradeButton">
+        <Setter Property="Foreground" 
+                Value="#ffffff"/>
+        <Setter Property="FontFamily" 
+                Value="helvetica"/>
+        <Setter Property="FontSize"
+                Value="15"/>
+        <Setter Property="Height" Value="25"/>
+        <Setter Property="FontWeight" 
+                Value="Light"/>
+        <Setter Property="Background" 
+                Value="#6c797d"/>
+        <Setter Property="Margin" Value="-1"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" BorderThickness="1" BorderBrush="#000000">
+                        <ContentPresenter HorizontalAlignment="Center" 
+                                          VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" 
+                     Value="True">
+                <Setter Property="Background" 
+                        Value="#B9BFC1"/>
+                <Setter Property="Opacity" 
+                        Value="0.6"/>
+                <Setter Property="FontWeight" 
+                        Value="SemiBold"/>
+                <Setter Property="Foreground" 
+                        Value="#FC8431"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+
+
+</ResourceDictionary>
