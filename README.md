@@ -8,5 +8,5 @@
 ## Description
 
  `.Net Core WPF` desktop application in `C#`.
- This application was developed in an academic course during the second year at EPFC.
+  This application was developed in an academic course during the second year at EPFC.
  It uses a homemade framework.
