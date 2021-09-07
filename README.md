@@ -28,3 +28,13 @@
   <img alt="Screenshot" src="https://github.com/Xebache/MyMoodle/blob/main/docs/screenshots/teacher_questions.png" width="225" />
   <img alt="Screenshot" src="https://github.com/Xebache/MyMoodle/blob/main/docs/screenshots/teacher_grade.png" width="225" />
 </div>
+
+## Miscellaneous
+
+ DB users:
+
+ <table>
+    <tr>
+        <td>Prof 1</td><td>teacher1@mail.eu</td><td>Password1</td>
+  </tr>
+ </table>
